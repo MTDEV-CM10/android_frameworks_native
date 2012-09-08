@@ -353,6 +353,12 @@ int SurfaceTextureClient::perform(int operation, va_list args)
     case NATIVE_WINDOW_SET_BUFFERS_SIZE:
         res = dispatchSetBuffersSize(args);
         break;
+<<<<<<< HEAD
+=======
+    case NATIVE_WINDOW_SET_MIN_UNDEQUEUED_BUFFER_COUNT:
+        res = dispatchSetMinUndequeuedBufferCount(args);
+        break;
+>>>>>>> origin/master
 #endif
     case NATIVE_WINDOW_LOCK:
         res = dispatchLock(args);
@@ -434,6 +440,14 @@ int SurfaceTextureClient::dispatchSetBuffersSize(va_list args) {
     int size = va_arg(args, int);
     return setBuffersSize(size);
 }
+<<<<<<< HEAD
+=======
+
+int SurfaceTextureClient::dispatchSetMinUndequeuedBufferCount(va_list args) {
+    int count = va_arg(args, int);
+    return setMinUndequeuedBufferCount(count);
+}
+>>>>>>> origin/master
 #endif
 
 int SurfaceTextureClient::dispatchSetScalingMode(va_list args) {
@@ -624,6 +638,22 @@ int SurfaceTextureClient::setBuffersSize(int size)
     status_t err = mSurfaceTexture->setBuffersSize(size);
     return NO_ERROR;
 }
+<<<<<<< HEAD
+=======
+
+int SurfaceTextureClient::setMinUndequeuedBufferCount(int count)
+{
+    ATRACE_CALL();
+    ALOGV("SurfaceTextureClient::setMinUndequeuedBufferCount");
+
+    if (count<0)
+        return BAD_VALUE;
+
+    Mutex::Autolock lock(mMutex);
+    status_t err = mSurfaceTexture->setMinUndequeuedBufferCount(count);
+    return NO_ERROR;
+}
+>>>>>>> origin/master
 #endif
 
 int SurfaceTextureClient::setScalingMode(int mode)
